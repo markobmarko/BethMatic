@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Predictions | BetMathic</title>
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            BetMathic
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/predictions">Predictions</a>
+
+        </div>
+
+    </div>
+
+    <div class="prediction-container">
+
+        <div class="form-box">
+
+            <form method="POST">
+
+                <select name="league">
+
+                    {% for league in leagues %}
+
+                    <option
+                    value="{{ league.name }}">
+
+                        {{ league.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <select name="home_team">
+
+                    {% for team in teams %}
+
+                    <option
+                    value="{{ team.name }}">
+
+                        {{ team.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <select name="away_team">
+
+                    {% for team in teams %}
+
+                    <option
+                    value="{{ team.name }}">
+
+                        {{ team.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit">
+
+                    GENERATE AI PREDICTION
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if prediction %}
+
+        <div class="result-box">
+
+            <div class="result-title">
+
+                {{ prediction.home_team }}
+
+                vs
+
+                {{ prediction.away_team }}
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>HOME WIN</span>
+
+                <span>{{ prediction.home_win }}%</span>
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>DRAW</span>
+
+                <span>{{ prediction.draw }}%</span>
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>AWAY WIN</span>
+
+                <span>{{ prediction.away_win }}%</span>
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>OVER 2.5</span>
+
+                <span>{{ prediction.over25 }}%</span>
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>BTTS YES</span>
+
+                <span>{{ prediction.btts }}%</span>
+
+            </div>
+
+            <div class="prediction-row">
+
+                <span>EXPECTED GOALS</span>
+
+                <span>
+
+                    {{ prediction.home_xg }}
+
+                    -
+
+                    {{ prediction.away_xg }}
+
+                </span>
+
+            </div>
+
+            <h2>
+                Most Likely Scores
+            </h2>
+
+            {% for score in prediction.scores %}
+
+            <div class="score-card">
+
+                {{ score[0] }}
+
+                —
+
+                {{ (score[1] * 100)|round(2) }}%
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>BetMathic</title>
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            BetMathic
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/predictions">Predictions</a>
+
+        </div>
+
+    </div>
+
+    <div class="hero">
+
+        <h1>
+            Football Predictions Powered By AI
+        </h1>
+
+        <p>
+            BetMathic analyzes xG, shots,
+            possession, recent form,
+            attack & defense strength
+            using advanced Poisson modeling.
+        </p>
+
+        <div class="development-box">
+
+            WEBSITE CURRENTLY IN DEVELOPMENT
+            — ONLY PREMIER LEAGUE AVAILABLE
+
+        </div>
+
+        <a
+        class="main-button"
+        href="/predictions">
+
+            START PREDICTING
+
+        </a>
+
+    </div>
+
+    <div class="section-title">
+
+        Latest Matches
+
+    </div>
+
+    <div class="matches-container">
+
+        {% for match in matches %}
+
+        <div class="match-card">
+
+            <div class="match-date">
+                {{ match.date }}
+            </div>
+
+            <div class="match-teams">
+
+                {{ match.home_team }}
+
+                {{ match.home_goals }}
+
+                -
+
+                {{ match.away_goals }}
+
+                {{ match.away_team }}
+
+            </div>
+
+            <div class="match-xg">
+
+                xG:
+                {{ match.home_xg }}
+                -
+                {{ match.away_xg }}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="footer">
+
+        BetMathic AI Prediction Engine
+
+    </div>
+
+</body>
+
+</html>
